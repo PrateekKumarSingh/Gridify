@@ -10,4 +10,4 @@ Get-ChildItem "$PSScriptRoot\Source\" | ForEach-Object {
 # Export only the functions using PowerShell standard verb-noun naming.
 # Be sure to list each exported functions in the FunctionsToExport field of the module manifest file.
 # This improves performance of command discovery in PowerShell.
-# Export-ModuleMember -Function Set-GridLayout -Alias
+Export-ModuleMember -Function "*-*" -Alias *

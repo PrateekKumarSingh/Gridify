@@ -1,8 +1,7 @@
-Function Set-ApplicationGrid {
+Function MoveApplication {
     [CmdletBinding()]
     Param (
-        [parameter(ValueFromPipelineByPropertyName = $True)]
-        $ProcessID,
+        [int]$ProcessID,
         [Double]$X,
         [Double]$Y,
         [Double]$Width,
