@@ -24,10 +24,10 @@ GUID = '80adcdd2-8ae4-43ba-aaa1-37335c6fae6c'
 Author = 'prate'
 
 # Company or vendor of this module
-CompanyName = 'Unknown'
+CompanyName = 'Prateek Singh'
 
 # Copyright statement for this module
-Copyright = '(c) 2017 prate. All rights reserved.'
+Copyright = '(c) 2017 Prateek Singh All rights reserved.'
 
 # Description of the functionality provided by this module
 # Description = ''
@@ -69,7 +69,7 @@ Copyright = '(c) 2017 prate. All rights reserved.'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = '*'
+FunctionsToExport = 'Set-GridLayout'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = '*'
