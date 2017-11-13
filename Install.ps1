@@ -12,8 +12,11 @@ Param (
     [String]$ModuleName = 'Gridify',
     [String]$InstallDirectory,
     [ValidateNotNullOrEmpty()]
-    [String]$GitPath = 'https://github.com/PrateekKumarSingh/Gridify/tree/master/'
+    [String]$GitPath = 'https://github.com/PrateekKumarSingh/Gridify/master/'
 )
+
+$Pre = $VerbosePreference
+$VerbosePreference = 'continue'
 
     Try {
         Write-Verbose "$ModuleName module installation started"
@@ -66,3 +69,4 @@ Param (
     Catch {
         throw "Failed installing the module in the install directory '$InstallDirectory': $_"
     }
+$VerbosePreference = $Pre
