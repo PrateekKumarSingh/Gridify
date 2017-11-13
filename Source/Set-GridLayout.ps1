@@ -36,7 +36,7 @@ So, with custom format = '***,**,*,****' in the grid layout
 .EXAMPLE
 $ProcessID = @()
 $ProcessID = 1..3 | Foreach {(Start-Process Powershell.exe -WorkingDirectory c:\ -PassThru).ID}
-$ProcessID += 1 | Foreach {(Start-Process notepad.exe -PassThru).ID}
+$ProcessID += 1 | Foreach {(Start-Process Python.exe -PassThru).ID}
 $ProcessID += 1..5 | Foreach {(Start-Process cmd.exe -WorkingDirectory c:\ -PassThru).ID}
 
 Get the Process ID's of target applications,
