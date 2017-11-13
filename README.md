@@ -3,7 +3,7 @@ PowerShell Gridify
 
 **'Gridify'** module provides a cmdlet **'Set-GridLayout'** that can **resize** and **arrange** applications in an **automatic grid layout** with predefined formats using the ProcessID's of the target applications passed as a parameter(**-ProcessID**) value.
 
-![](https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/GridLayout.png)
+![](https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/mosaic2.jpg)
 
 Cmdlet can automatically calculate the your screen resolution and set Applications in a neat grid layout in predefined/custom layout
 
