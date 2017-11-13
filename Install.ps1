@@ -15,7 +15,6 @@ Param (
     [String]$GitPath = 'https://github.com/PrateekKumarSingh/Gridify/tree/master/'
 )
 
-Begin {
     Try {
         Write-Verbose "$ModuleName module installation started"
 
@@ -30,9 +29,7 @@ Begin {
     Catch {
         throw "Failed installing the module in the install directory '$InstallDirectory': $_"
     }
-}
 
-Process {
     Try {
         if (-not $InstallDirectory) {
             Write-Verbose "$ModuleName no installation directory provided"
@@ -68,4 +65,3 @@ Process {
     Catch {
         throw "Failed installing the module in the install directory '$InstallDirectory': $_"
     }
-}
