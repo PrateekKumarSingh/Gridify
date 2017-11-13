@@ -15,7 +15,7 @@ Available predifined layout formats are
 
 * **Vertical**
 
-    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Vertical.gif" height="369" width="680" >
+    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Vertical.gif">
 
 * **Horizontal**
 
