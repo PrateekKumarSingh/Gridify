@@ -44,14 +44,12 @@ and a customizable grid layout for special requirements
     Where **"*"** represent an application and **","** separates a row in the grid-layout
 
     So, with custom format like in the below example the grid layout would be like
-
+    ```
         Row1 has 3 applications
-
         Row2 has 2 applications
-
         Row3 has 1 applications
-
         Row4 has 4 applications
+    ```
 
     ```PowerShell
     Set-GridLayout -ProcessID $ProcessID -Custom '***,**,*,****'
