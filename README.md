@@ -51,5 +51,6 @@ iex (new-object System.Net.WebClient).DownloadString('https://raw.githubusercont
 
 Known Issues
 -
-{Prateekkumarsingh}/{gridify}#1
-{Prateekkumarsingh}/{gridify}#2
+Prateekkumarsingh/gridify#1
+
+Prateekkumarsingh/gridify#2
