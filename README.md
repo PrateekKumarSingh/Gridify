@@ -1,7 +1,7 @@
 PowerShell Gridify
 -
 
-'Gridify' module provides a cmdlet 'Set-GridLayout' that can resize and arrange applications in an automatic grid layout with predefined formats using the ProcessID's of the target applications passed as a parameter(-ProcessID) value.
+**'Gridify'** module provides a cmdlet **'Set-GridLayout'** that can **resize** and **arrange** applications in an **automatic grid layout** with predefined formats using the ProcessID's of the target applications passed as a parameter(**-ProcessID**) value.
 
 Cmdlet can automatically calculate the your screen resolution and set Applications in a neat grid layout in predefined/custom layout
 
@@ -59,30 +59,6 @@ Run below commands to see some examples
 Get-Help Set-GridLayout -Examples
 ```
 
-
-Installation
--
-#### [PowerShell V5](https://www.microsoft.com/en-us/download/details.aspx?id=50395) and Later
-You can install the `Gridify` module directly from the PowerShell Gallery
-
-* [Recommended] Install to your personal PowerShell Modules folder
-```PowerShell
-Install-Module Gridify -scope CurrentUser
-```
-
-![](https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Installation_v5.jpg)
-
-* [Requires Elevation] Install for Everyone (computer PowerShell Modules folder)
-```PowerShell
-Install-Module Gridify
-```
-
-#### PowerShell V4 and Earlier
-To install to your personal modules folder run:
-
-```PowerShell
-iex (new-object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Install.ps1')
-```
 
 Known Issues
 -
