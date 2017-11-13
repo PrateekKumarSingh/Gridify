@@ -11,21 +11,21 @@ Available predifined layout formats are
 
     ![](https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/GridLayout.png)
 
-    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Mosaic.gif" align="left" height="369" width="680" >
+    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Mosaic.gif" height="369" width="680" >
 
 * **Vertical**
 
-    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Vertical.gif" align="left" height="369" width="680" >
+    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Vertical.gif" height="369" width="680" >
 
 * **Horizontal**
 
-    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Horizontal.gif" align="left" height="369" width="680" >
+    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Horizontal.gif" height="369" width="680" >
 
 and a customizable grid layout for special requirements
 
 * **Custom** : A custom format can  be used to set the applications in a grid-layout on the screen, by passing a custom string as a value to the parameter(-Custom).
 
-    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/CustomMosaic.gif" align="left" height="369" width="680" >
+    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/CustomMosaic.gif" height="369" width="680" >
 
 Help Information
 -
