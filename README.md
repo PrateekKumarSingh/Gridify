@@ -1,16 +1,29 @@
 PowerShell Gridify
 -
 
-Sets applications in an automatic grid layout with predefined formats ('Vertical','Horizontal','Mosaic') using the ProcessID's of the target applications passed as a parameter(-ProcessID) value
+'Gridify' module provides a cmdlet 'Set-GridLayout' that can resize and arrange applications in an automatic grid layout with predefined formats using the ProcessID's of the target applications passed as a parameter(-ProcessID) value.
 
-A custom format can also be used to set the applications in a grid-layout on the display, by passing a custom string as a value to the parameter(-Custom).
+Available Predifined formats are
 
+* **Mosaic**
+
+![](https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/GridLayout.png)
+
+* **Vertical**
+* **Horizontal**
+
+and a customizable grid layout for special needs
+
+* **Custom** : A custom format can  be used to set the applications in a grid-layout on the screen, by passing a custom string as a value to the parameter(-Custom).
+
+
+Help Information
+-
 Run below commands to see some examples
 ```PowerShell
 Get-Help Set-GridLayout -Examples
 ```
 
-![](https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/GridLayout.png)
 
 Installation
 -
@@ -35,3 +48,8 @@ To install to your personal modules folder run:
 ```PowerShell
 iex (new-object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Install.ps1')
 ```
+
+Known Issues
+-
+[#1](//github.com/user/project/issues/1)
+[#2](//github.com/user/project/issues/2)
