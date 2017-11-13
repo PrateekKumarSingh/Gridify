@@ -39,14 +39,7 @@ and a customizable grid layout for special requirements
 
     <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/CustomMosaic.gif" height="369" width="680" >
 
-    To set applications is custom grid-layout utilize the 'Custom' parameter and pass the custom layout as comma-separated string of '*' (Astrix)
-
-    Where **"*"** represent an application and **","** separates a row in the grid-layout
-    So, with custom format = "***,**,*,****" in the grid layout
-        Row1 has 3 applications
-        Row2 has 2 applications
-        Row3 has 1 applications
-        Row4 has 4 applications    To set applications is custom grid-layout utilize the 'Custom' parameter and pass the custom layout as comma-separated string of '*' (Astrix)
+    To set applications is custom grid-layout utilize the 'Custom' parameter and pass the custom layout as comma-separated string of * (Astrix)
 
     Where **"*"** represent an application and **","** separates a row in the grid-layout
     So, with custom format like in the below example the grid layout would be like
