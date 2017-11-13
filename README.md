@@ -10,7 +10,7 @@ Run below commands to see some examples
 Get-Help Set-GridLayout -Examples
 ```
 
-![](https://raw.githubusercontent.com/PrateekKumarSingh/master/images/GridLayout.png)
+![](https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/GridLayout.png)
 
 Installation
 -
@@ -22,7 +22,7 @@ You can install the `Gridify` module directly from the PowerShell Gallery
 Install-Module Gridify -scope CurrentUser
 ```
 
-![](https://raw.githubusercontent.com/PrateekKumarSingh/master/images/Installation_v5.jpg)
+![](https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Installation_v5.jpg)
 
 * [Requires Elevation] Install for Everyone (computer PowerShell Modules folder)
 ```PowerShell
