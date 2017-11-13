@@ -30,7 +30,13 @@ CompanyName = 'Prateek Singh'
 Copyright = '(c) 2017 Prateek Singh All rights reserved.'
 
 # Description of the functionality provided by this module
-# Description = ''
+Description = "Sets applications in an automatic grid layout with predefined formats ('Vertical','Horizontal','Mosaic') using the ProcessID's of the target applications passed as a parameter(-ProcessID) value
+
+A custom format can also be used to set the applications in a grid-layout on the display, by passing a custom string as a value to the parameter(-Custom).
+
+Run below commands to see some examples
+
+    Get-Help Set-GridLayout -Examples"
 
 # Minimum version of the Windows PowerShell engine required by this module
 # PowerShellVersion = ''
