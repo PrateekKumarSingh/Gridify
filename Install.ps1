@@ -12,7 +12,7 @@ Param (
     [String]$ModuleName = 'Gridify',
     [String]$InstallDirectory,
     [ValidateNotNullOrEmpty()]
-    [String]$GitPath = 'https://github.com/PrateekKumarSingh/Gridify/master/'
+    [String]$GitPath = 'https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master'
 )
 
 $Pre = $VerbosePreference
@@ -60,7 +60,11 @@ $VerbosePreference = 'continue'
         $WebClient = New-Object System.Net.WebClient
 
         $Files | ForEach-Object {
-            $WebClient.DownloadFile("$GitPath/$_","$installDirectory\$_")
+            $File = $installDirectory,'\',$($_ -replace '/','\') -join ''
+            $URL = $GitPath,'/',$_ -join ''
+            "$URL $File"
+
+            $WebClient.DownloadFile($URL,$File)
             Write-Verbose "$ModuleName installed module file '$_'"
         }
 
