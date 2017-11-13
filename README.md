@@ -11,6 +11,7 @@ Available predifined layout formats are
 
     ![](https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/GridLayout.png)
 
+    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Mosaic.gif" align="left" height="500" width="400" >
     ![](https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Mosaic.gif = 500x400)
 
 * **Vertical**
