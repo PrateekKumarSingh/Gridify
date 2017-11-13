@@ -61,6 +61,5 @@ iex (new-object System.Net.WebClient).DownloadString('https://raw.githubusercont
 
 Known Issues
 -
-#1 - Application window size
-
-#2 - Limited only to the Primary monitor
+![Issue#1](https://github.com/PrateekKumarSingh/Gridify/issues/1) - Fixed Application window size
+![Issue#2](https://github.com/PrateekKumarSingh/Gridify/issues/2) - Limited only to the Primary monitor
