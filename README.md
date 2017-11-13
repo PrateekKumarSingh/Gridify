@@ -7,7 +7,7 @@ Available Predifined formats are
 
 * **Mosaic**
 
-![](https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/GridLayout.png)
+    ![](https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/GridLayout.png)
 
 * **Vertical**
 * **Horizontal**
@@ -51,5 +51,5 @@ iex (new-object System.Net.WebClient).DownloadString('https://raw.githubusercont
 
 Known Issues
 -
-[#1](//github.com/user/project/issues/1)
-[#2](//github.com/user/project/issues/2)
+[#1](//github.com/user/gridify/issues/1)
+[#2](//github.com/user/gridify/issues/2)
