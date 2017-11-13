@@ -35,8 +35,9 @@ So, with custom format = '***,**,*,****' in the grid layout
 
 .EXAMPLE
 $ProcessID = @()
-$ProcessID = 1..5 | Foreach {(Start-Process Powershell.exe -ArgumentList "-NoExit","-File Job.ps1" -PassThru).ID}
-$ProcessID += 1..2 | Foreach {(Start-Process Python.exe "Job.py" -PassThru).ID}
+$ProcessID = 1..3 | Foreach {(Start-Process Powershell.exe -WorkingDirectory c:\ -PassThru).ID}
+$ProcessID += 1 | Foreach {(Start-Process notepad.exe -PassThru).ID}
+$ProcessID += 1..5 | Foreach {(Start-Process cmd.exe -WorkingDirectory c:\ -PassThru).ID}
 
 Get the Process ID's of target applications,
 
@@ -52,13 +53,13 @@ Use the 'Layout' parameter set the applications in a 'Vetrical' grid-layout
 
 
 .EXAMPLE
-Set-GridLayout -ProcessID $ProcessID -Layout Vertical
+Set-GridLayout -ProcessID $ProcessID -Layout Horizontal
 
 Use the 'Layout' parameter set the applications in a 'Horizontal' grid-layout
 
 
 .EXAMPLE
-Set-GridLayout -ProcessID $ProcessID -Custom '***,**,*,****'
+Set-GridLayout -ProcessID $ProcessID -Custom '**,**,*,****'
 
 To set applications is custom grid-layout utilize the 'Custom' parameter and pass the custom layout as comma-separated string of '*' (Astrix)
 
