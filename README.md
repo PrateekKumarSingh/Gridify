@@ -7,18 +7,29 @@ Cmdlet can automatically calculate the your screen resolution and set Applicatio
 
 Available predifined layout formats are
 
-* **Mosaic**
+* **Mosaic** : This is the default layout of the cmdlet.
+
+    ```PowerShell
+    Set-GridLayout -ProcessID $ProcessID
+    ```
 
     ![](https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/GridLayout.png)
 
     <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Mosaic.gif" height="369" width="680" >
 
-* **Vertical**
+* **Vertical** : Vertical Layout sets all application vertically side by side in a single row to fit the screen resolution
+
+    ```PowerShell
+    Set-GridLayout -ProcessID $ProcessID -Layout Vertical
+    ```
 
     <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Vertical.gif">
 
-* **Horizontal**
+* **Horizontal** : Horizontal Layout sets all application horizontally one over another in a single column to fit the screen resolution
 
+    ```PowerShell
+    Set-GridLayout -ProcessID $ProcessID -Layout Horizontal
+    ```
     <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Horizontal.gif" height="369" width="680" >
 
 and a customizable grid layout for special requirements
@@ -26,6 +37,20 @@ and a customizable grid layout for special requirements
 * **Custom** : A custom format can  be used to set the applications in a grid-layout on the screen, by passing a custom string as a value to the parameter(-Custom).
 
     <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/CustomMosaic.gif" height="369" width="680" >
+
+    To set applications is custom grid-layout utilize the 'Custom' parameter and pass the custom layout as comma-separated string of '*' (Astrix)
+
+    Where '*' represent an application and ',' separates a row in the grid-layout"
+    So, with custom format = '***,**,*,****' in the grid layout
+        Row1 has 3 applications
+        Row2 has 2 applications
+        Row3 has 1 applications
+        Row4 has 4 applications
+
+    ```PowerShell
+    Set-GridLayout -ProcessID $ProcessID -Custom '***,**,*,****'
+    ```
+
 
 Help Information
 -
