@@ -25,8 +25,8 @@ $VerbosePreference = 'continue'
             'Gridify.psd1',
             'Gridify.psm1',
             'README.md',
-            'Source\MoveApplication.ps1',
-            'Source\Set-GridLayout.ps1'
+            'Source/MoveApplication.ps1',
+            'Source/Set-GridLayout.ps1'
         )
     }
     Catch {
@@ -52,8 +52,8 @@ $VerbosePreference = 'continue'
         }
 
         if (-not (Test-Path $InstallDirectory)) {
-            New-Item -Path $InstallDirectory -ItemType Directory -EA Stop | Out-Null
-            New-Item -Path $InstallDirectory\Source -ItemType Directory -EA Stop | Out-Null
+            New-Item -Path $InstallDirectory -ItemType Directory -EA Stop -Verbose | Out-Null
+            New-Item -Path $InstallDirectory\Source -ItemType Directory -EA Stop -Verbose | Out-Null
             Write-Verbose "$ModuleName created module folder '$InstallDirectory'"
         }
 
