@@ -42,6 +42,7 @@ and a customizable grid layout for special requirements
     To set applications is custom grid-layout utilize the 'Custom' parameter and pass the custom layout as comma-separated string of * (Asterisk)
 
     Where **"*"** represent an application and **","** separates a row in the grid-layout
+
     So, with custom format like in the below example the grid layout would be like
 
         Row1 has 3 applications
