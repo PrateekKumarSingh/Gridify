@@ -1,7 +1,21 @@
+
+function ShowWindow($Process){
+  $sig = '
+    [DllImport("user32.dll")] public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
+    [DllImport("user32.dll")] public static extern int SetForegroundWindow(IntPtr hwnd);
+  '
+  
+  $Mode = 4 
+  $type = Add-Type -MemberDefinition $sig -Name WindowAPI -PassThru
+  $hwnd = $process.MainWindowHandle
+  $null = $type::ShowWindowAsync($hwnd, $Mode)
+  $null = $type::SetForegroundWindow($hwnd) 
+}
+
 Function MoveApplication {
     [CmdletBinding()]
     Param (
-        [int]$ProcessID,
+        [System.Diagnostics.Process]$Process,
         [Double]$X,
         [Double]$Y,
         [Double]$Width,
@@ -40,7 +54,7 @@ Function MoveApplication {
     Process
     {
         $Rectangle = New-Object RECT
-        $Handle = (Get-Process -ID $ProcessID).MainWindowHandle
+        $Handle = $Process.MainWindowHandle
         $Return = [Window]::GetWindowRect($Handle, [ref]$Rectangle)
         If (-NOT $PSBoundParameters.ContainsKey('Width'))
         {
@@ -52,6 +66,7 @@ Function MoveApplication {
         }
         If ($Return)
         {
+            ShowWindow $Process
             $Return = [Window]::MoveWindow($Handle, $x, $y, $Width, $Height, $True)
         }
         If ($PSBoundParameters.ContainsKey('Passthru'))
@@ -70,7 +85,7 @@ Function MoveApplication {
                     Write-Warning "Window is minimized! Coordinates will not be accurate."
                 }
                 $Object = [pscustomobject]@{
-                    ProcessID   = $ProcessID
+                    ProcessID   = $Process.Id
                     Size        = $Size
                     TopLeft     = $TopLeft
                     BottomRight = $BottomRight
