@@ -65,7 +65,7 @@ Use the 'Layout' parameter set the applications in a 'Horizontal' grid-layout
 
 
 .EXAMPLE
-Set-GridLayout -Process $ID -Custom '**,**,*,****'
+Set-GridLayout -Process $Process -Custom '**,**,*,****'
 
 To set applications is custom grid-layout utilize the 'Custom' parameter and pass the custom layout as comma-separated string of '*' (Astrix)
 
@@ -77,12 +77,12 @@ So, with custom format = '***,**,*,****' in the grid layout
     Row4 has 4 applications
 
 .EXAMPLE
-Grid $ID
+Grid $Process
 
 'grid' is an alias of cmdlet Set-GridLayout
 
 .EXAMPLE
-sgl $ID -Layout Vertical
+sgl $Process -Layout Vertical
 
 'sgl' is an alias of cmdlet Set-GridLayout
 
@@ -111,14 +111,14 @@ Function Set-GridLayout {
         [Parameter(
             Mandatory = $true,
             ParameterSetName = 'Custom',
-            ValueFromPipeline=$true, 
+            ValueFromPipeline=$true,
             Position=0,
             HelpMessage = "Provide a ProcessID of the application"
         )]
         [Parameter(
             Mandatory = $true,
             ParameterSetName = 'default',
-            ValueFromPipeline=$true, 
+            ValueFromPipeline=$true,
             Position=0,
             HelpMessage = "Provide a ProcessID of the application"
         )] [System.Diagnostics.Process[]] $Process,
@@ -139,7 +139,9 @@ Function Set-GridLayout {
         $hRes = $monitor.Width
 
         if($Custom){
-            $Layout = 'Custom'
+            Write-Verbose "Setting Processes in Custom layout"
+        }else{
+            Write-Verbose "Setting Processes in $Layout layout"
         }
     }
     End{
@@ -150,7 +152,6 @@ Function Set-GridLayout {
         else{
             $Process = $Input
         }
-        Write-Verbose "Setting Processes in $Layout layout"
         if($Layout -eq 'Vertical'){
             $Height = $vRes
             $Width = $hRes/$Count
@@ -230,8 +231,8 @@ Function Set-GridLayout {
                 $NumberOfApps = ($CustomString -replace ",","").length
                 $height = $vRes/$NumberOfRows
 
-                if($NumberOfApps -ne $ID.Count){
-                    throw "Number of apps = $NumberOfApps in custom grid layout is not equal to the Process Id's passed = $($ID.Count)"
+                if($NumberOfApps -ne $Process.Count){
+                    throw "Number of apps = $NumberOfApps in custom grid layout is not equal to the Process Id's passed = $($Process.Count)"
                 }
                 else{
                     For($i=0;$i -lt $NumberOfRows;$i++){
