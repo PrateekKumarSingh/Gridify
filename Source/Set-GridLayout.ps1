@@ -113,14 +113,15 @@ Function Set-GridLayout {
             ParameterSetName = 'Custom',
             ValueFromPipeline=$true,
             Position=0,
-            HelpMessage = "Provide a ProcessID of the application"
-        )]
+            HelpMessage = "Provide a System.Diagnostics.Process[] object"
+            )]
+
         [Parameter(
             Mandatory = $true,
             ParameterSetName = 'default',
             ValueFromPipeline=$true,
             Position=0,
-            HelpMessage = "Provide a ProcessID of the application"
+            HelpMessage = "Provide a System.Diagnostics.Process[] object"
         )] [System.Diagnostics.Process[]] $Process,
         [Parameter(ParameterSetName = 'default')] [ValidateSet('Vertical', 'Horizontal', 'Mosaic')] [string] $Layout='Mosaic',
         [Parameter(ParameterSetName = 'Custom')]
