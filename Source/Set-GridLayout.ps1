@@ -130,7 +130,8 @@ Function Set-GridLayout {
                             Else {
                                 Throw "`nAccepted custom grid format is something like -custom '***,**,*,****' `nhere '*' represent an application and ',' separates a row in the grid-layout"
                             }
-        })] [String] $Custom
+        })] [String] $Custom,
+        [Switch] $IncludeSource
     )
 
     Begin{
@@ -138,6 +139,13 @@ Function Set-GridLayout {
         $Monitor = [System.Windows.Forms.Screen]::AllScreens.Where( {$_.Primary -eq $true }).Bounds
         $vRes = $monitor.Height -40  # -40 to make the edges appear above the task bar
         $hRes = $monitor.Width
+
+        if($IncludeSource)
+        {
+            $Process += Get-ParentProcess
+            Write-Host "from BEGIN" -fore Yellow
+            $process | Select-Object name, *id
+        }
 
         if($Custom){
             Write-Verbose "Setting Processes in Custom layout"
@@ -152,7 +160,14 @@ Function Set-GridLayout {
         }
         else{
             $Process = $Input
+            if($IncludeSource)
+            {
+                Write-Host "from END" -fore Yellow
+                $Process += Get-ParentProcess
+                $process | Select-Object name, *id
+            }
         }
+
         if($Layout -eq 'Vertical'){
             $Height = $vRes
             $Width = $hRes/$Count
@@ -172,13 +187,13 @@ Function Set-GridLayout {
             }
         }
         elseif ($Layout -eq 'Mosaic'){
-                $PositionX = 0
-                $PositionY = 0
-                $Rows = 2 #Row more than 2 won't be able to display data properly, hence made it static
-                $even = $Count%2 -eq 0
+            $PositionX = 0
+            $PositionY = 0
+            $Rows = 2 #Row more than 2 won't be able to display data properly, hence made it static
+            $even = $Count%2 -eq 0
 
-                    If($even){
-                        $Col = 0
+            If($even){
+                $Col = 0
                         $Columns = $Count/$Rows
                         $Height = $vRes/$Rows
                         $Width = $hRes/$Columns
