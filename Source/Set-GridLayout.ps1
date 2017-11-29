@@ -33,7 +33,8 @@ So, with custom format = '***,**,*,****' in the grid layout
     Row2 has 2 applications
     Row3 has 1 applications
     Row4 has 4 applications
-
+.PARAMETER IncludeSource
+Switch parameter that includes the source process that executes the cmdlet in the th Grid-Layout.
 .EXAMPLE
 Get-Process notepad | Set-GridLayout
 
@@ -134,140 +135,128 @@ Function Set-GridLayout {
         [Switch] $IncludeSource
     )
 
-    Begin{
-        Add-Type -AssemblyName System.Windows.Forms
-        $Monitor = [System.Windows.Forms.Screen]::AllScreens.Where( {$_.Primary -eq $true }).Bounds
-        $vRes = $monitor.Height -40  # -40 to make the edges appear above the task bar
-        $hRes = $monitor.Width
+    Add-Type -AssemblyName System.Windows.Forms
+    $Monitor = [System.Windows.Forms.Screen]::AllScreens.Where( {$_.Primary -eq $true }).Bounds
+    $vRes = $monitor.Height -40  # -40 to make the edges appear above the task bar
+    $hRes = $monitor.Width
 
-        if($IncludeSource)
-        {
-            $Process += Get-ParentProcess
-            Write-Host "from BEGIN" -fore Yellow
-            $process | Select-Object name, *id
-        }
+    # Handling the Layout verbosity
+    if($Custom){
+        Write-Verbose "Setting Processes in Custom layout"
+    }else{
+        Write-Verbose "Setting Processes in $Layout layout"
+    }
 
-        if($Custom){
-            Write-Verbose "Setting Processes in Custom layout"
-        }else{
-            Write-Verbose "Setting Processes in $Layout layout"
+    # Handling the pipeline input with -IncludeSource switch
+    if($IncludeSource -and $Input){ # when PipelineInput = $true AND $IncludeSource = $true
+        $Process = $Input + $(Get-ParentProcess)
+    }
+    elseif($IncludeSource -and $Process){ # when PipelineInput = $false AND $IncludeSource = $true
+        $Process = $Process + $(Get-ParentProcess)
+    }
+    elseif($Input -and -not $IncludeSource){ # when PipelineInput = $true AND $IncludeSource = false
+        $Process = $Input
+    }
+
+    # when PipelineInput = $false AND $IncludeSource = false
+    $Count = $Process.Count
+
+    if($Layout -eq 'Vertical'){
+        $Height = $vRes
+        $Width = $hRes/$Count
+        $Position = 0
+
+        $Process | ForEach-Object {
+            MoveApplication -Process $_ -X $Position -Y 0 -Height $Height -Width $Width
+            $Position += $Width
         }
     }
-    End{
-        $Count = $Input.Count
-        if ($Count -eq 0){
-            $Count = $Process.Count
+    elseif($Layout -eq 'Horizontal') {
+        $Height = $vRes/$Count
+        $Width = $hRes
+        $Position = 0
+
+        $Process | ForEach-Object {
+            MoveApplication -Process $_ -X 0 -Y $Position -Height $Height -Width $Width
+            $Position += $Height
+        }
+    }
+    elseif ($Layout -eq 'Mosaic'){
+        $PositionX = 0
+        $PositionY = 0
+        $Rows = 2 #Row more than 2 won't be able to display data properly, hence made it static
+        $even = $Count%2 -eq 0
+
+        If($even){
+            $Col = 0
+            $Columns = $Count/$Rows
+            $Height = $vRes/$Rows
+            $Width = $hRes/$Columns
+
+            For($i =0 ;$i -lt $Count;$i++)
+            {
+                $Col++
+                If($col -gt $Columns){
+                    $PositionX = 0
+                    $Col = 0
+                    $PositionY = $Height
+                }
+
+                MoveApplication -Process $Process[$i] -X $PositionX -Y $PositionY -Height $Height -Width $Width
+                $PositionX += $Width
+            }
         }
         else{
-            $Process = $Input
-            if($IncludeSource)
+            $Col = 0
+            $Columns = [math]::Floor($Count/$Rows)
+            $Height = $vRes/$Rows
+            $Width = $hRes/$Column
+
+            For($i =0 ;$i -lt $Count;$i++)
             {
-                Write-Host "from END" -fore Yellow
-                $Process += Get-ParentProcess
-                $process | Select-Object name, *id
-            }
-        }
-
-        if($Layout -eq 'Vertical'){
-            $Height = $vRes
-            $Width = $hRes/$Count
-            $Position = 0
-            $Process | ForEach-Object {
-                MoveApplication -Process $_ -X $Position -Y 0 -Height $Height -Width $Width
-                $Position += $Width
-            }
-        }
-        elseif($Layout -eq 'Horizontal') {
-            $Height = $vRes/$Count
-            $Width = $hRes
-            $Position = 0
-            $Process | ForEach-Object {
-                MoveApplication -Process $_ -X 0 -Y $Position -Height $Height -Width $Width
-                $Position += $Height
-            }
-        }
-        elseif ($Layout -eq 'Mosaic'){
-            $PositionX = 0
-            $PositionY = 0
-            $Rows = 2 #Row more than 2 won't be able to display data properly, hence made it static
-            $even = $Count%2 -eq 0
-
-            If($even){
-                $Col = 0
-                        $Columns = $Count/$Rows
-                        $Height = $vRes/$Rows
-                        $Width = $hRes/$Columns
-
-                        For($i =0 ;$i -lt $Count;$i++)
-                        {
-                            $Col++
-                            If($col -gt $Columns)
-                            {
-                                $PositionX = 0
-                                $Col = 0
-                                $PositionY = $Height
-                            }
-                            MoveApplication -Process $Process[$i] -X $PositionX -Y $PositionY -Height $Height -Width $Width
-                            $PositionX += $Width
-                        }
-                    }
-                    else{
-                        $Col = 0
-                        $Columns = [math]::Floor($Count/$Rows)
-                        $Height = $vRes/$Rows
-                        $Width = $hRes/$Columns
-
-                        For($i =0 ;$i -lt $Count;$i++)
-                        {
-                            $Col++
-                            If($col -gt $Columns)
-                            {
-                                ++$Columns
-                                $Width = $hRes/$Columns
-                                $PositionX = 0
-                                $Col = 0
-                                $PositionY = $Height
-                                MoveApplication -Process $Process[$i] -X $PositionX -Y $PositionY -Height $Height -Width $Width
-                            }
-                            else {
-                                MoveApplication -Process $Process[$i] -X $PositionX -Y $PositionY -Height $Height -Width $Width
-                            }
-
-                            $PositionX += $Width
-                        }
-                    }
-        }
-
-            if ($Custom) {
-                $AppsPlacedInGrid = 0
-                $XCoordinate = 0 ; $YCoordinate = 0
-                $CustomString = $Custom
-                $Array = @()
-                $NumberOfRows = ($Custom -split "," | Tee-Object -Variable Array).count
-                $NumberOfApps = ($CustomString -replace ",","").length
-                $height = $vRes/$NumberOfRows
-
-                if($NumberOfApps -ne $Process.Count){
-                    throw "Number of apps = $NumberOfApps in custom grid layout is not equal to the Process Id's passed = $($Process.Count)"
+                $Col++
+                If($col -gt $Columns){
+                    ++$Columns
+                    $Width = $hRes/$Columns
+                    $PositionX = 0
+                    $Col = 0
+                    $PositionY = $Height
+                    MoveApplication -Process $Process[$i] -X $PositionX -Y $PositionY -Height $Height -Width $Width
                 }
-                else{
-                    For($i=0;$i -lt $NumberOfRows;$i++){
-                        $NumberOfAppsInCurrentRow = $Array[$i].Length
-                        $width = $hRes / $NumberOfAppsInCurrentRow
-                        # Iterate through ProcessID's
-                        $Process[$AppsPlacedInGrid..$($AppsPlacedInGrid+$NumberOfAppsInCurrentRow-1)] | ForEach-Object {
-                            # Set application in a grid with coordinates, height and width
-                            MoveApplication -Process $_ -X $XCoordinate -Y $YCoordinate -Height $Height -Width $Width
-                            $XCoordinate += $width # move the XCoordinate of next app to the width of previous app
-                            $AppsPlacedInGrid++
-                        }
-                        $YCoordinate += $height # Change YCoordinates for every row
-                        $XCoordinate = 0 # XCoordinate resets after every row
-                    }
-
+                else {
+                    MoveApplication -Process $Process[$i] -X $PositionX -Y $PositionY -Height $Height -Width $Width
                 }
-
+                $PositionX += $Width
             }
         }
+    }
 
+    if ($Custom) {
+        $AppsPlacedInGrid = 0
+        $XCoordinate = 0 ; $YCoordinate = 0
+        $CustomString = $Custom
+        $Array = @()
+        $NumberOfRows = ($Custom -split "," | Tee-Object -Variable Array).count
+        $NumberOfApps = ($CustomString -replace ",","").length
+        $height = $vRes/$NumberOfRow
+
+        if($NumberOfApps -ne $Process.Count){
+            throw "Number of apps = $NumberOfApps in custom grid layout is not equal to the Process Id's passed = $($Process.Count)"
+        }
+        else{
+            For($i=0;$i -lt $NumberOfRows;$i++){
+                $NumberOfAppsInCurrentRow = $Array[$i].Length
+                $width = $hRes / $NumberOfAppsInCurrentRow
+                # Iterate through ProcessID's
+                $Process[$AppsPlacedInGrid..$($AppsPlacedInGrid+$NumberOfAppsInCurrentRow-1)] | ForEach-Object {
+                    # Set application in a grid with coordinates, height and width
+                    MoveApplication -Process $_ -X $XCoordinate -Y $YCoordinate -Height $Height -Width $Width
+                    $XCoordinate += $width # move the XCoordinate of next app to the width of previous app
+                    $AppsPlacedInGrid++
+                }
+                $YCoordinate += $height # Change YCoordinates for every row
+                $XCoordinate = 0 # XCoordinate resets after every row
+            }
+        }
+    }
 }
