@@ -52,7 +52,7 @@ and a customizable grid layout for special requirements
     ```
 
     ```PowerShell
-    Set-GridLayout -Process $Process-Custom '***,**,*,****'
+    Set-GridLayout -Process $Process -Custom '***,**,*,****'
     ```
 
  Installation
