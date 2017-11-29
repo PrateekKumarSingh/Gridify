@@ -1,7 +1,7 @@
 PowerShell Gridify
 -
 
-**'Gridify'** module provides a cmdlet **'Set-GridLayout'** that can **resize** and **arrange** applications in an **automatic grid layout** with predefined formats using the ProcessID's of the target applications passed as a parameter(**-ProcessID**) value.
+**'Gridify'** module provides a cmdlet **'Set-GridLayout'** that can **resize** and **arrange** applications in an **automatic grid layout** with predefined formats using the Processes of the target applications passed as a parameter(**-Process**) value.
 
 ![](https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/mosaic2.jpg)
 
@@ -12,7 +12,7 @@ Available predifined layout formats are
 * **Mosaic** : This is the default layout of the cmdlet.
 
     ```PowerShell
-    Set-GridLayout -ProcessID $ProcessID
+    Set-GridLayout -Process $Process
     ```
 
 
@@ -21,7 +21,7 @@ Available predifined layout formats are
 * **Vertical** : Vertical Layout sets all application vertically side by side in a single row to fit the screen resolution
 
     ```PowerShell
-    Set-GridLayout -ProcessID $ProcessID -Layout Vertical
+    Set-GridLayout -Process $Process -Layout Vertical
     ```
 
     <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Vertical.gif">
@@ -29,7 +29,7 @@ Available predifined layout formats are
 * **Horizontal** : Horizontal Layout sets all application horizontally one over another in a single column to fit the screen resolution
 
     ```PowerShell
-    Set-GridLayout -ProcessID $ProcessID -Layout Horizontal
+    Set-GridLayout -Process $Process -Layout Horizontal
     ```
     <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Horizontal.gif" height="369" width="680" >
 
@@ -52,7 +52,7 @@ and a customizable grid layout for special requirements
     ```
 
     ```PowerShell
-    Set-GridLayout -ProcessID $ProcessID -Custom '***,**,*,****'
+    Set-GridLayout -Process $Process-Custom '***,**,*,****'
     ```
 
  Installation
