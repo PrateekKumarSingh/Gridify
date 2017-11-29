@@ -210,7 +210,7 @@ Function Set-GridLayout {
             $Col = 0
             $Columns = [math]::Floor($Count/$Rows)
             $Height = $vRes/$Rows
-            $Width = $hRes/$Column
+            $Width = $hRes/$Columns
 
             For($i =0 ;$i -lt $Count;$i++)
             {
@@ -238,7 +238,7 @@ Function Set-GridLayout {
         $Array = @()
         $NumberOfRows = ($Custom -split "," | Tee-Object -Variable Array).count
         $NumberOfApps = ($CustomString -replace ",","").length
-        $height = $vRes/$NumberOfRow
+        $height = $vRes/$NumberOfRows
 
         if($NumberOfApps -ne $Process.Count){
             throw "Number of apps = $NumberOfApps in custom grid layout is not equal to the Process Id's passed = $($Process.Count)"
