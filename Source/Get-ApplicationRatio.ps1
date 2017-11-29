@@ -1,5 +1,6 @@
 Function Get-ApplicationRatio{
     [cmdletbinding()]
+    [Alias('Ratio')]
     Param($String)
     $Rows = $String.split(',')
     for($i=0;$i -lt $Rows.count;$i++){
