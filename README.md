@@ -16,7 +16,7 @@ Available predifined layout formats are
     ```
 
 
-    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Mosaic.gif" height="369" width="680" >
+    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Mosaic.gif">
 
 * **Vertical** : Vertical Layout sets all application vertically side by side in a single row to fit the screen resolution
 
@@ -31,13 +31,13 @@ Available predifined layout formats are
     ```PowerShell
     Set-GridLayout -Process $Process -Layout Horizontal
     ```
-    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Horizontal.gif" height="369" width="680" >
+    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Horizontal.gif">
 
 and a customizable grid layout for special requirements
 
 * **Custom** : A custom format can  be used to set the applications in a grid-layout on the screen, by passing a custom string as a value to the parameter(-Custom).
 
-    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/CustomMosaic.gif" height="369" width="680" >
+    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/CustomMosaic.gif">
 
     To set applications is custom grid-layout utilize the 'Custom' parameter and pass the custom layout as comma-separated string of * (Asterisk)
 
