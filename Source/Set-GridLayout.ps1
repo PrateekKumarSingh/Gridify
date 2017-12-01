@@ -124,7 +124,7 @@ Function Set-GridLayout {
             Position=0,
             HelpMessage = "Provide a System.Diagnostics.Process[] object"
         )] [System.Diagnostics.Process[]] $Process,
-        [Parameter(ParameterSetName = 'default')] [ValidateSet('Vertical', 'Horizontal', 'Mosaic')] [string] $Layout='Mosaic',
+        [Parameter(ParameterSetName = 'default')] [ValidateSet('Vertical', 'Horizontal', 'Cascade', 'Mosaic')] [string] $Layout='Mosaic',
         [Parameter(ParameterSetName = 'Custom')]
         [ValidateScript({
                             If ($_ -match '^[-\w\s\*]+(?:,[-\w\s\*]+)*$'){$True}
@@ -181,6 +181,17 @@ Function Set-GridLayout {
             $Position += $Height
         }
     }
+    elseif($Layout -eq 'Cascade') {
+        $Height = $vRes/1.5
+        $Width = $hRes/1.2
+        $X = 40
+        $y = 40
+
+        $Process | ForEach-Object {
+            MoveApplication -Process $_ -X $X -Y $Y -Height $Height -Width $Width
+            $X += 25 ;  $Y += 25
+        }
+    }
     elseif ($Layout -eq 'Mosaic'){
         $PositionX = 0
         $PositionY = 0
@@ -234,25 +245,35 @@ Function Set-GridLayout {
     if ($Custom) {
         $AppsPlacedInGrid = 0
         $XCoordinate = 0 ; $YCoordinate = 0
-        $CustomString = $Custom
-        $Array = @()
-        $NumberOfRows = ($Custom -split "," | Tee-Object -Variable Array).count
-        $NumberOfApps = ($CustomString -replace ",","").length
+        $RowArray = ($Custom -split ",").foreach({$_.ToCharArray().Where({$_ -eq '*'}) -join ''})
+        $Ratio = Get-ApplicationRatio -String $Custom
+
+        $NumberOfRows = $RowArray.count
+        $NumberOfApps = ( ($RowArray -join '') -replace ",","").length
         $height = $vRes/$NumberOfRows
 
         if($NumberOfApps -ne $Process.Count){
             throw "Number of apps = $NumberOfApps in custom grid layout is not equal to the Process Id's passed = $($Process.Count)"
         }
         else{
+            # Iterate through each row
             For($i=0;$i -lt $NumberOfRows;$i++){
-                $NumberOfAppsInCurrentRow = $Array[$i].Length
-                $width = $hRes / $NumberOfAppsInCurrentRow
+                $NumberOfAppsInCurrentRow = $RowArray[$i].Length
+                $RowApplicationRatioArray =  $Ratio[$i] -split ':'
+                #$N = ($RowApplicationRatio -split ':' | Measure-Object -Sum).Sum
+                $width = $hRes / $(($RowApplicationRatioArray | Measure-Object -Sum).Sum)
+                #$width = $hRes / $NumberOfAppsInCurrentRow
+
+                $j = 0 # counter to access application ratio per row
+
                 # Iterate through ProcessID's
                 $Process[$AppsPlacedInGrid..$($AppsPlacedInGrid+$NumberOfAppsInCurrentRow-1)] | ForEach-Object {
                     # Set application in a grid with coordinates, height and width
-                    MoveApplication -Process $_ -X $XCoordinate -Y $YCoordinate -Height $Height -Width $Width
-                    $XCoordinate += $width # move the XCoordinate of next app to the width of previous app
+                    $CurrentAppplicationWidth = $Width * $RowApplicationRatioArray[$j] # base width multiplied by the ratio
+                    MoveApplication -Process $_ -X $XCoordinate -Y $YCoordinate -Height $Height -Width $CurrentAppplicationWidth
+                    $XCoordinate += $CurrentAppplicationWidth # move the XCoordinate of next app to the width of previous app
                     $AppsPlacedInGrid++
+                    $j++ # Next application ratio in the Row
                 }
                 $YCoordinate += $height # Change YCoordinates for every row
                 $XCoordinate = 0 # XCoordinate resets after every row
