@@ -32,6 +32,12 @@ Available predifined layout formats are
     Set-GridLayout -Process $Process -Layout Horizontal
     ```
     <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Horizontal.gif">
+* **Cascade** : Cascade Layout sets all application in a step like layout, such that the next one overlaping the previous one
+
+    ```PowerShell
+    Set-GridLayout -Process $Process -Layout Cascade
+    ```
+    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Horizontal.gif">
 
 and a customizable grid layout for special requirements
 
@@ -54,6 +60,23 @@ and a customizable grid layout for special requirements
     ```PowerShell
     Set-GridLayout -Process $Process -Custom '***,**,*,****'
     ```
+
+    This parameter also enables you to define width-ratio of applications in row, to give the ability to customize application sizes as per the requirement
+
+    ```PowerShell
+    # to define a ratio preceede the asterix of that application with a number
+    # such as -custom "*2*3*" is 1:2:3
+    $process |Set-GridLayout -Custom "***,***,***"
+    $process |Set-GridLayout -Custom "*2*2**,*2*,3***"
+    $process |Set-GridLayout -Custom "*3*2**,*2*,3***" -Verbose
+    VERBOSE: Setting Processes in Custom layout
+    VERBOSE: Row1 application ratio is 1:3:2:1
+    VERBOSE: Row2 application ratio is 1:2
+    VERBOSE: Row3 application ratio is 3:1:1
+    ```
+
+    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/CustomRatio.gif">
+
 
  Installation
  -
@@ -79,6 +102,13 @@ and a customizable grid layout for special requirements
  iex (new-object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Install.ps1')
  ```
 
+What's New
+-
+**12/02/2017**
+* Accepts process[] objects as an input from the pipeline
+* '-IncludeSource' switch to add source process to the grid layout
+* '-Layout Cascade' included
+* Ability to define application width ratios in a -Custom layout
 
 Help Information
 -
