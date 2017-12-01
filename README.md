@@ -61,7 +61,7 @@ and a customizable grid layout for special requirements
     Set-GridLayout -Process $Process -Custom '***,**,*,****'
     ```
 
-    This parameter also enables you to define width-ratio of applications in row, to give the ability to customize application sizes as per the requirement
+    This parameter also enables you to define width-ratio of applications in every row, to give the ability to customize application width sizes as per the requirement.
 
     ```PowerShell
     # to define a ratio preceede the asterix of that application with a number
