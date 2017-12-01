@@ -37,7 +37,7 @@ Available predifined layout formats are
     ```PowerShell
     Set-GridLayout -Process $Process -Layout Cascade
     ```
-    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Horizontal.gif">
+    <img src="https://raw.githubusercontent.com/PrateekKumarSingh/Gridify/master/Images/Cascade.gif">
 
 and a customizable grid layout for special requirements
 
