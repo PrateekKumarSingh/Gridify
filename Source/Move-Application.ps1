@@ -9,7 +9,7 @@ function ShowWindow($Process){
   $type = Add-Type -MemberDefinition $sig -Name WindowAPI -PassThru
   $hwnd = $process.MainWindowHandle
   $null = $type::ShowWindowAsync($hwnd, $Mode)
-  $null = $type::SetForegroundWindow($hwnd)
+  #$null = $type::SetForegroundWindow($hwnd)
 }
 
 Function MoveApplication {
