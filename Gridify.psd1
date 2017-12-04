@@ -12,7 +12,7 @@
 RootModule = 'Gridify.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.9.1'
+ModuleVersion = '0.9.2'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -30,13 +30,18 @@ CompanyName = 'Prateek Singh'
 Copyright = '(c) 2017 Prateek Singh All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = "Sets applications in an automatic grid layout with predefined formats ('Vertical','Horizontal','Mosaic') using the ProcessID's of the target applications passed as a parameter(-ProcessID) value
+    Description   = "'Gridify' module provides a cmdlet 'Set-GridLayout' that can resize and arrange applications in an automatic grid layout with predefined formats using the Processes of the target applications passed as a parameter(-Process) value.
+Cmdlet can automatically calculate the your screen resolution and set Applications in a neat grid layout in predefined/custom layout
 
-A custom format can also be used to set the applications in a grid-layout on the display, by passing a custom string as a value to the parameter(-Custom).
+Available predifined layout formats are
+1. Mosaic
+2. Vertical
+3. Horizontal
+4. Cascade
+5. Custom
 
 Run below commands to see some examples
-
-    Get-Help Set-GridLayout -Examples"
+Get-Help Set-GridLayout -Examples"
 
 # Minimum version of the Windows PowerShell engine required by this module
 # PowerShellVersion = ''
@@ -113,7 +118,12 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        # ReleaseNotes = ''
+        ReleaseNotes = '
+1. Accepts process[] objects as an input from the pipeline
+2. -IncludeSource switch to add source process to the grid layout
+3. A new Cascade layout available
+4. Ability to define application width ratios in a -Custom layout
+'
 
     } # End of PSData hashtable
 
